@@ -18,5 +18,13 @@ for i = 1:1:length(yAxis)
 end
 fprintf("\n");
 
+yRange = zeros(1, length(xRange));
+for i = 1:1:length(xRange)
+    yRange(i) = calculateNewtonDiff(xAxis, yAxis, xRange(i));
+end
+
 figure
     plot(xAxis, yAxis)
+    hold on
+
+    plot(xRange, yRange, LineWidth=1.5)
