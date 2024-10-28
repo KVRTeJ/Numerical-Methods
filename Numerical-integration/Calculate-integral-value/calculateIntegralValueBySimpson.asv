@@ -9,15 +9,15 @@ function [result, nodeCount] = calculateIntegralValueBySimpson(from, to, accurac
     sumEven = 0;
     sumOdd = 0;
     for i = 2:1:segmentCount
-        step = (to - from) / segmentCount;
+        step = (to - from) / 3 * segmentCount;
 
-        %TODO: loop for sum odd
-        for j = (from + step * 2):(step * 2):(to - step)
-            sumOdd = sumOdd + myFunction(j);
+        %TODO: loop for odd
+        for i = (from + step * 2):(step * 2):(to - step)
+            sumOdd = sumOdd + myFunction(i);
         end
-        %TODO: loop for sum even
-        for j = (from + step):(step * 2):(to - step * 2)
-            sumEven = sumEven + myFunction(j);
+        %TODO: loop for even
+        for i = (from + step):(step * 2):(to - step * 2)
+            sumEven = sumEven + myFunction(i);
         end
         
         coef = (to - from) / (3 * segmentCount);
