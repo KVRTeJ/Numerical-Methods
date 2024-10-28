@@ -9,10 +9,11 @@ function [result, nodeCount] = calculateIntegralValueBySimpson(from, to, accurac
     coef = 0; % (b - a) / (3 * m)
     leftHandSide = myFunction(from);
     rightHandSide = myFunction(to);
-    while abs((result - dataResult) / 15) > accuracy%FIXME
+    while abs((result - dataResult) / 15) > accuracy
         step = (to - from) / segmentCount;
 
         sumEven = sumEven + sumOdd;
+        sumOdd = 0;
         for i = (from + step):(2 * step):(to - step)
             sumOdd = sumOdd + myFunction(i);
         end
@@ -22,7 +23,6 @@ function [result, nodeCount] = calculateIntegralValueBySimpson(from, to, accurac
         result = coef * (leftHandSide + rightHandSide + 2 * sumEven + 4 * sumOdd);
         nodeCount = segmentCount;
 
-        sumOdd = 0;
-        segmentCount = segmentCount * 2
+        segmentCount = segmentCount * 2;
     end
 end
