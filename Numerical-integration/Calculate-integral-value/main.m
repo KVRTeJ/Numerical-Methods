@@ -6,9 +6,9 @@ fun = myFunction(interval);
 accuracy = 0.0005;
 
 [result, temp] = calculateIntegralValueBySimpson(interval(1), interval(2), accuracy);
-fprintf("Значение интегралла:");
+fprintf("Значение интеграла:");
 disp(result)
-fprintf("Количество узлов:");
+fprintf("Число узлов, которое потребовалось для вычисления интеграла с заданной точностью:");
 disp(temp)
 
 
