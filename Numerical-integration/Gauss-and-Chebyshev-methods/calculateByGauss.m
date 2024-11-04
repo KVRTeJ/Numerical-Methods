@@ -5,9 +5,10 @@ function [result, m] = calculateByGauss(from, to, accuracy, valueCount)
     coefsCount7 = [0.1294849 0.2797053 0.3818300 0.4179591 0.3818300 0.2797053 0.1294849];
     nodesValueCount7 = [-0.9491079 -0.7415311 -0.4058451 0.0000000 0.4058451 0.7415311 0.9491079];
 
+    m = 0;
     result = 0; 
-    oldResult = -1;
-    while abs(result - oldResult) <= accuracy %FIXME: 
+    oldResult = 1;
+    while abs(result - oldResult) > accuracy
 
         m = m + 1;
         
