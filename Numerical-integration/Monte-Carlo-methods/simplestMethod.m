@@ -1,4 +1,4 @@
-function result = simplestMethod(from, to, accuracy)
+function [integralValue, size] = simplestMethod(from, to, accuracy)
 
     size = 1000;
 
@@ -8,7 +8,7 @@ function result = simplestMethod(from, to, accuracy)
     integralValue = (to - from) / size * sum(eta);
     dispersion = (to - from) ^ 2 / size * sum(eta.^2) - integralValue ^ 2;
 
-    sizeStep = 100;
+    sizeStep = 1000;
     oldIntegralValue = 0;
     while 3 * sqrt(dispersion / size) > accuracy
         epsilon = from + (to - from) * rand(sizeStep, 1);
