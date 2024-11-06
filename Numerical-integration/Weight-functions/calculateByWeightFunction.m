@@ -7,15 +7,16 @@ function [result, count]= calculateByWeightFunction(accuracy, nodesCount)
         result = 0;
 
         nodes = zeros(1, count);
+        coefs = zeros(1, count);
         for i = 1:1:count
-            nodes(i) = cos(((2 * i - 1) * pi) / (2 * count));
+            nodes(i) = cos((i * pi) / (count + 1));
+            coefs(i) = (pi / (count + 1)) * power(sin((i * pi) / (count + 1)), 2);
         end
     
         
         for i = 1:1:count
-            result = result + nodes(i)^2 * log(nodes(i) + 2);
+            result = result + nodes(i)^2 * log(nodes(i) + 2) * coefs(i);
         end
-        result = result * (pi / count);
 
         count = count + 1;
     end
