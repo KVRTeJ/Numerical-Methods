@@ -2,14 +2,14 @@ clc
 clear all
 
 interval = [-1 1];
-fun = myFunction(interval(1));
-fun = myFunction(interval(2));
 accuracy = 0.0005;
 
-value = calculateByGauss(-1, 1, accuracy, 6);
-fprintf("\n%f\n", value);
-value = calculateByChebyshev(-1, 1, accuracy, 6);
-fprintf("\n%f\n", value);
+value = calculateByGauss(-1, 1, accuracy, 7);
+fprintf("\nЗначение интеграла вычесленное с помощью медота Гаусса: %f\n", value);
+value = calculateByChebyshev(-1, 1, accuracy, 7);
+fprintf("Значение интеграла вычесленное с помощью метода Чебышева: %f\n", value);
+fprintf("\n")
 [temp, n] = calculateByWeightFunction(accuracy, 7);
-fprintf("\n%f\n", temp);
-disp(n);
+fprintf("Значение интеграла вычесленное с помощью частного случая квадратурной формулы(p(x) = sqrt(1 - x^2)): %f\n", temp);
+fprintf("Количество узлов: %d\n", n);
+
