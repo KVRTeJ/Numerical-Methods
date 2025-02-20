@@ -38,6 +38,14 @@ MainWindow::MainWindow(QWidget *parent, Function function,
     initialApproximation = 4;
     secantMethod(initialApproximation);
 
+    ui->textBrowser->append("\n");
+
+    initialApproximation = 2.5;
+    steffensenMethod(initialApproximation);
+    initialApproximation = 4;
+    steffensenMethod(initialApproximation);
+
+    qDebug() << m_function.getDerived(1);
 }
 
 MainWindow::~MainWindow() {
@@ -126,4 +134,34 @@ void MainWindow::secantMethod(double initialApproximation) const {
     ui->textBrowser->append("Результат - " + QString::number(next) + "\n" + "Количество итераций - " + QString::number(stepCount) + '\n');
 
     qDebug() << "secantMethod ended\n";
+}
+
+void MainWindow::steffensenMethod(double initialApproximation) const {
+    qDebug() << "simpleIterationsMethod started";
+
+    ui->textBrowser->append("Метод простых итераций:");
+    ui->textBrowser->append("Начальное приближение - " +
+                            QString::number(initialApproximation));
+
+    int stepCount = 0;
+    double current = m_function.getSecondCanonForm(initialApproximation);
+    double next = (initialApproximation * m_function.getSecondCanonForm(m_function.getSecondCanonForm(initialApproximation)) -
+                   pow(m_function.getSecondCanonForm(initialApproximation), 2)) /
+                  (m_function.getSecondCanonForm(m_function.getSecondCanonForm(initialApproximation)) -
+                   2 * m_function.getSecondCanonForm(initialApproximation) + initialApproximation);
+
+    while(abs(next - current) >= m_accuracy) {
+        current = next;
+        next = (current * m_function.getSecondCanonForm(m_function.getSecondCanonForm(current)) -
+                pow(m_function.getSecondCanonForm(current), 2)) /
+               (m_function.getSecondCanonForm(m_function.getSecondCanonForm(current)) -
+                2 * m_function.getSecondCanonForm(current) + current);
+        ++stepCount;
+
+        qDebug() << next << current << next - current;
+    }
+
+    ui->textBrowser->append("Результат - " + QString::number(next) + "\n" + "Количество итераций - " + QString::number(stepCount) + '\n');
+
+    qDebug() << "simpleIterationsMethod ended\n";
 }

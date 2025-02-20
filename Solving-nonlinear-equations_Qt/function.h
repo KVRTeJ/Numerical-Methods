@@ -6,7 +6,7 @@
 class Function {
 public:
     double getFirstCanonForm(const double input) const {
-        return acos(pow(input, 2) + 3 * input - 14);
+        return (acos(pow(input, 2) + 3 * input - 14));
     }
 
     double getSecondCanonForm(const double input) const {
@@ -15,6 +15,10 @@ public:
 
     double getThirdCanonForm(const double input) const {
         return (sin(input) / 3 - pow(input, 2) / 3 + 14/3);
+    }
+
+    double getDerived(const double input) const {
+        return (cos(input) - 2 * input - 3);
     }
 
     double operator() (const double input) const {
