@@ -2,8 +2,7 @@
 
 This project is a graphical application for numerical solving of nonlinear equations with visualization of results. It is implemented using Qt 5.15 and C++17, with the `QCustomPlot` library for plotting graphs.
 
-![Example Interface](<img width="823" alt="Снимок экрана 2025-02-21 в 00 49 55" src="https://github.com/user-attachments/assets/ea0bc044-9f0b-4b18-b03d-fd50c9b0691a" />
-)
+<img width="823" alt="Example interface" src="https://github.com/user-attachments/assets/ea0bc044-9f0b-4b18-b03d-fd50c9b0691a" />
 
 ## Features
 - Solving equations using methods:
@@ -26,4 +25,10 @@ This project is a graphical application for numerical solving of nonlinear equat
    ```bash
    git clone https://github.com/yourusername/Solving-nonlinear-equations_Qt.git
    ```
-~             
+## Project Structure
+.
+├── function.h        # My mathematical function
+├── mainwindow.h/cpp  # Interface logic
+├── qcustomplot.h/cpp # Plotting library
+├── mainwindow.ui     # Interface XML description
+└── Solving-nonlinear-equations_Qt.pro # Build configuration        
