@@ -27,25 +27,24 @@ MainWindow::MainWindow(QWidget *parent, Function function,
     drawGraph();
 
     double initialApproximation = 2.5;
+    double initialApproximationFarther = 4;
     simpleIterationsMethod(initialApproximation);
-    initialApproximation = 4;
-    simpleIterationsMethod(initialApproximation);
+    simpleIterationsMethod(initialApproximationFarther);
 
     ui->textBrowser->append("\n");
 
-    initialApproximation = 2.5;
     secantMethod(initialApproximation);
-    initialApproximation = 4;
-    secantMethod(initialApproximation);
+    secantMethod(initialApproximationFarther);
 
     ui->textBrowser->append("\n");
 
-    initialApproximation = 2.5;
     steffensenMethod(initialApproximation);
-    initialApproximation = 4;
-    steffensenMethod(initialApproximation);
+    steffensenMethod(initialApproximationFarther);
 
-    qDebug() << m_function.getDerived(1);
+    ui->textBrowser->append("\n");
+
+    newtonMethod(initialApproximation);
+    newtonMethod(initialApproximationFarther);
 }
 
 MainWindow::~MainWindow() {
@@ -137,9 +136,9 @@ void MainWindow::secantMethod(double initialApproximation) const {
 }
 
 void MainWindow::steffensenMethod(double initialApproximation) const {
-    qDebug() << "simpleIterationsMethod started";
+    qDebug() << "steffensenMethod started";
 
-    ui->textBrowser->append("Метод простых итераций:");
+    ui->textBrowser->append("Метод Стеффенсена:");
     ui->textBrowser->append("Начальное приближение - " +
                             QString::number(initialApproximation));
 
@@ -163,5 +162,29 @@ void MainWindow::steffensenMethod(double initialApproximation) const {
 
     ui->textBrowser->append("Результат - " + QString::number(next) + "\n" + "Количество итераций - " + QString::number(stepCount) + '\n');
 
-    qDebug() << "simpleIterationsMethod ended\n";
+    qDebug() << "steffensenMethod ended\n";
+}
+
+void MainWindow::newtonMethod(double initialApproximation) const {
+    qDebug() << "newtonMethod started";
+
+    ui->textBrowser->append("Метод Ньютона:");
+    ui->textBrowser->append("Начальное приближение - " +
+                            QString::number(initialApproximation));
+
+    int stepCount = 0;
+    double current = m_function.getSecondCanonForm(initialApproximation);
+    double next = current - m_function(current) / m_function.getDerived(current);
+
+    while(abs(next - current) >= m_accuracy) {
+        current = next;
+        next =  current - m_function(current) / m_function.getDerived(current);
+        ++stepCount;
+
+        qDebug() << next << current << next - current;
+    }
+
+    ui->textBrowser->append("Результат - " + QString::number(next) + "\n" + "Количество итераций - " + QString::number(stepCount) + '\n');
+
+    qDebug() << "newtonMethod ended\n";
 }

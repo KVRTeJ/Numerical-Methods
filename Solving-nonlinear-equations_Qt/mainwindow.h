@@ -23,7 +23,7 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget *parent = nullptr, Function function = {},
                double xBegin = -10, double xEnd = 10, double step = 0.1,
-               double accuracy = (0.5 * pow(10, -5)));
+               double accuracy = (0.5 * pow(10, -4)));
     ~MainWindow();
 
     double getXStart() const {return m_xStart;}
@@ -40,6 +40,8 @@ public:
     void simpleIterationsMethod(double initialApproximation) const;
     void secantMethod(double initialApproximation) const;
     void steffensenMethod(double initialApproximation) const;
+
+    void newtonMethod(double initialApproximation) const;
 
 private:
     Ui::MainWindow *ui;
