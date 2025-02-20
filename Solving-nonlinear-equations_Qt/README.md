@@ -24,11 +24,4 @@ This project is a graphical application for numerical solving of nonlinear equat
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/Solving-nonlinear-equations_Qt.git
-   ```
-## Project Structure
-.
-├── function.h        # My mathematical function
-├── mainwindow.h/cpp  # Interface logic
-├── qcustomplot.h/cpp # Plotting library
-├── mainwindow.ui     # Interface XML description
-└── Solving-nonlinear-equations_Qt.pro # Build configuration        
+   ```       
