@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>556</width>
-    <height>438</height>
+    <width>830</width>
+    <height>718</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,16 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QCustomPlot" name="widget" native="true"/>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="handleWidth">
+       <number>30</number>
+      </property>
+      <widget class="QCustomPlot" name="widget" native="true"/>
+      <widget class="QTextBrowser" name="textBrowser"/>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -25,7 +34,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>556</width>
+     <width>830</width>
      <height>22</height>
     </rect>
    </property>

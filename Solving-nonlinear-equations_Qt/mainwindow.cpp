@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent, Function function, double xBegin, double
 
     drawGraph();
 
+    ui->textBrowser->append("test\n;");
 }
 
 MainWindow::~MainWindow() {
@@ -37,8 +38,6 @@ void MainWindow::calculateData() {
 
 void MainWindow::drawGraph() {
     ui->widget->addGraph();
-
-    const int stepCoef = 1;
 
     ui->widget->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
 

@@ -30,6 +30,8 @@ public:
     void calculateData();
     void drawGraph();
 
+
+
 private:
     Ui::MainWindow *ui;
 
