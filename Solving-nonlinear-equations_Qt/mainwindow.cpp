@@ -43,8 +43,19 @@ MainWindow::MainWindow(QWidget *parent, Function function,
 
     ui->textBrowser->append("\n");
 
+    initialApproximation = 2.63; //т.к. f(x0)*f(x0)'' > 0 по теории
     newtonMethod(initialApproximation);
     newtonMethod(initialApproximationFarther);
+
+    ui->textBrowser->append("\n");
+
+    newtonSecantMethod(initialApproximation);
+    newtonSecantMethod(initialApproximationFarther);
+
+    ui->textBrowser->append("\n");
+
+    newtonConstDerivativeValue(initialApproximation);
+    newtonConstDerivativeValue(initialApproximationFarther);
 }
 
 MainWindow::~MainWindow() {
@@ -173,7 +184,7 @@ void MainWindow::newtonMethod(double initialApproximation) const {
                             QString::number(initialApproximation));
 
     int stepCount = 0;
-    double current = m_function.getSecondCanonForm(initialApproximation);
+    double current = initialApproximation - m_function(initialApproximation) / m_function.getDerived(initialApproximation);
     double next = current - m_function(current) / m_function.getDerived(current);
 
     while(abs(next - current) >= m_accuracy) {
@@ -187,4 +198,54 @@ void MainWindow::newtonMethod(double initialApproximation) const {
     ui->textBrowser->append("Результат - " + QString::number(next) + "\n" + "Количество итераций - " + QString::number(stepCount) + '\n');
 
     qDebug() << "newtonMethod ended\n";
+}
+
+void MainWindow::newtonSecantMethod(double initialApproximation) const {
+    qDebug() << "newtonSecantMethod started";
+
+    ui->textBrowser->append("Метод Ньютона, видоизмененный методом секущих:");
+    ui->textBrowser->append("Начальное приближение - " +
+                            QString::number(initialApproximation));
+
+    int stepCount = 0;
+    double current = -initialApproximation * m_function(0) / (m_function(initialApproximation) - m_function(0));
+    double next = (initialApproximation * m_function(current) - current * m_function(initialApproximation)) /
+                  (m_function(current) - m_function(initialApproximation));
+    double extra = 0;
+    while(abs(next - current) >= m_accuracy) {
+        extra = current;
+        current = next;
+        next = (extra * m_function(current) - current * m_function(extra)) /
+                  (m_function(current) - m_function(extra));
+        ++stepCount;
+
+        qDebug() << next << current << next - current;
+    }
+
+    ui->textBrowser->append("Результат - " + QString::number(next) + "\n" + "Количество итераций - " + QString::number(stepCount) + '\n');
+
+    qDebug() << "newtonSecantMethod ended\n";
+}
+
+void MainWindow::newtonConstDerivativeValue(double initialApproximation) const {
+    qDebug() << "newtonConstDerivativeValue started";
+
+    ui->textBrowser->append("Метод Ньютона, видоизмененный методом с постоянным значением производной:");
+    ui->textBrowser->append("Начальное приближение - " +
+                            QString::number(initialApproximation));
+
+    int stepCount = 0;
+    double current = initialApproximation -  m_function(initialApproximation) / m_function.getDerived(initialApproximation);
+    double next = current -  m_function(current) / m_function.getDerived(initialApproximation);
+    while(abs(next - current) >= m_accuracy) {
+        current = next;
+        next = current - m_function(current) / m_function.getDerived(initialApproximation);
+        ++stepCount;
+
+        qDebug() << next << current << next - current;
+    }
+
+    ui->textBrowser->append("Результат - " + QString::number(next) + "\n" + "Количество итераций - " + QString::number(stepCount) + '\n');
+
+    qDebug() << "newtonConstDerivativeValue ended\n";
 }

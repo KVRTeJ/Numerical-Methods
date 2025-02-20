@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <functional>
+
 #include <QMainWindow>
 #include <QVector>
 
@@ -29,10 +31,12 @@ public:
     double getXStart() const {return m_xStart;}
     double getXEnd() const {return m_xEnd;}
     double getStep() const {return m_step;}
+    double getAccuracy() const {return m_accuracy;}
 
     void setXStart(const double start) {m_xStart = start;}
     void setXEnd(const double end) {m_xEnd = end;}
     void setStep(const double step) {m_step = step;}
+    void setAccuracy(const double accuracy) {m_accuracy = accuracy;}
 
     void calculateGraphData();
     void drawGraph();
@@ -42,6 +46,8 @@ public:
     void steffensenMethod(double initialApproximation) const;
 
     void newtonMethod(double initialApproximation) const;
+    void newtonSecantMethod(double initialApproximation) const;
+    void newtonConstDerivativeValue(double initialApproximation) const;
 
 private:
     Ui::MainWindow *ui;
