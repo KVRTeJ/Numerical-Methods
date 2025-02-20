@@ -3,6 +3,7 @@
 
 #include <math.h>
 
+
 class Function {
 public:
     double operator() (const double input) {
