@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent, Function function,
 {
     ui->setupUi(this);
 
-
     ui->widget->xAxis2->setVisible(true);
     ui->widget->xAxis2->setTickLabels(false);
 
@@ -43,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent, Function function,
 
     ui->textBrowser->append("\n");
 
-    initialApproximation = 2.63; //т.к. f(x0)*f(x0)'' > 0 по теории
+    initialApproximation = 2.63; //т.к. f(x0)*f(x0)'' > 0
     newtonMethod(initialApproximation);
     newtonMethod(initialApproximationFarther);
 

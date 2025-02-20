@@ -15,8 +15,8 @@ class MainWindow;
 QT_END_NAMESPACE
 
 /*
- * Этот класс противоречит принципам SOLID, но, для экономии времени, я решил ими пренебречь,
- * т.к. в дальнейшем, я не буду поддерживать этот проект.
+ * This class contradicts the principles of SOLID, but to save time, I decided to ignore them,
+ * because in the future, I will not support this project.
  */
 
 class MainWindow : public QMainWindow {
