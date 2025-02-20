@@ -1,10 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent, Function function)
+MainWindow::MainWindow(QWidget *parent, Function function, double xBegin, double xEnd, double step)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , m_function(function)
+    , m_xStart(xBegin)
+    , m_xEnd(xEnd)
+    , m_step(step)
 {
     ui->setupUi(this);
 
@@ -14,10 +17,6 @@ MainWindow::MainWindow(QWidget *parent, Function function)
 
     ui->widget->yAxis2->setVisible(true);
     ui->widget->yAxis2->setTickLabels(false);
-
-    setXStart(2);
-    setXEnd(2.75);
-    setStep(0.1);
 
     calculateData();
 
@@ -41,17 +40,12 @@ void MainWindow::drawGraph() {
 
     const int stepCoef = 1;
 
-    ui->widget->xAxis->setRange(*std::max_element(x.begin(), x.end()) + (m_step * stepCoef),
-                                *std::min_element(x.begin(), x.end()) - (m_step * stepCoef));
-    ui->widget->yAxis->setRange(*std::max_element(y.begin(), y.end()) + (m_step * stepCoef),
-                                *std::min_element(y.begin(), y.end()) - (m_step * stepCoef));
-
-    ui->widget->xAxis2->setRange(*std::max_element(x.begin(), x.end()) + (m_step * stepCoef),
-                                 *std::min_element(x.begin(), x.end()) - (m_step * stepCoef));
-    ui->widget->yAxis2->setRange(*std::max_element(y.begin(), y.end()) + (m_step * stepCoef),
-                                 *std::min_element(y.begin(), y.end()) - (m_step * stepCoef));
+    ui->widget->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
 
     ui->widget->graph(0)->setData(x, y);
 
+    ui->widget->rescaleAxes(true);
+
+    ui->widget->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     ui->widget->replot();
 }

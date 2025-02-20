@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, Function function = {});
+    MainWindow(QWidget *parent = nullptr, Function function = {}, double xBegin = -10, double xEnd = 10, double step = 0.1);
     ~MainWindow();
 
     double getXStart() const {return m_xStart;}
