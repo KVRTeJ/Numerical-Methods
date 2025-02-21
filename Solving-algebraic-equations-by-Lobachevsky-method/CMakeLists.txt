@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(Solving-algebraic-equations-by-Lobachevsky-method main.cpp
     equation.h
+    lobachevskyMethod.h
 )
 
 include(GNUInstallDirs)

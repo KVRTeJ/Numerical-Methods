@@ -6,11 +6,12 @@
 
 class Equation {
 public:
-    Equation(std::vector<double> coefs = {2.5, 0.3, 2, 1})
+    Equation(std::vector<double> coefs = {2.5, 0.3, -2, 1})
         : m_coefs(coefs)
     {}
 
     std::vector<double> getCoefs() const {return m_coefs;}
+
     double operator() (const double x) {
         return (2.5 * pow(x, 3) + 0.3 * pow(x, 2) - 2 * x + 1);
     }
