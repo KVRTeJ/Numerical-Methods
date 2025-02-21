@@ -1,9 +1,11 @@
 #include <iostream>
 
-using namespace std;
+#include "equation.h"
 
-int main()
-{
-    cout << "Hello World!" << endl;
+int main() {
+    Equation eq;
+
+    std::cout << eq(1) << std::endl;
+
     return 0;
 }

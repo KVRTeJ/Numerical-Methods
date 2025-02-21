@@ -5,7 +5,9 @@ project(Solving-algebraic-equations-by-Lobachevsky-method LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(Solving-algebraic-equations-by-Lobachevsky-method main.cpp)
+add_executable(Solving-algebraic-equations-by-Lobachevsky-method main.cpp
+    equation.h
+)
 
 include(GNUInstallDirs)
 install(TARGETS Solving-algebraic-equations-by-Lobachevsky-method
