@@ -10,13 +10,9 @@ int main() {
     boo.printQuadrizationMatrix();
 
     auto result = boo();
-    for(int i = 0; i < result.size(); ++i) {
-        std::cout << result[i] << std::endl;
-    }
 
-    for(int i = 0; i < result.size(); ++i) {
-        std::cout << eq(result[i]) << std::endl;
-    }
+    std::cout << "Подставим в полином: " << std::endl;
+    std::cout << eq(*result.begin()) << std::endl;
 
     return 0;
 }
