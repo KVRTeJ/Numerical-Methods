@@ -4,21 +4,31 @@ clear all;
 % sin(y) + 2x = 2
 % cos(x - 1) + 4y = 1,5
 
-syms x  y;
-firstFun = sin(y) + 2 * x;
-secondFun = cos(x - 1) + 4 * y;
-accuracy = 0.5 * 10^(-4);
+firstFun = @(x, y) sin(y) + 2 * x - 2;
+secondFun = @(x, y) cos(x - 1) + 4 * y - 1.5;
+accuracy = 0.5 * 10^(-5);
 
 xRange = -pi:pi/100:pi;
-% canonForm1 = -asin(2 - 2 * xRange);
-% canonForm2 = (1.5 / -4*cos(xRange - 1));
+forInitialApproximation = -asin(2 - 2 * xRange);
+forInitialApproximation2 = (1.5/4 * (-cos(xRange - 1)/4));
 
-canonForm1 = (2 - sin(xRange)) / 2;
-canonForm2 = acos(0.7 - 3 * xRange);
+initialApproximation = [0.95 -0.09];
 
+canonForm1 = @(x, y) 1 - sin(y) /2;
+canonForm2 = @(x, y) (1.5 - cos(x - 1)) / 4;
+
+[x, y, steps] = simpleIterations(canonForm1, canonForm2, initialApproximation, accuracy);
+
+
+disp(x);
+disp(y);
+disp(steps);
+
+res = secondFun(x, y);
+disp(res);
 
 figure
-    plot(xRange, canonForm1,...
+    plot(xRange, forInitialApproximation,...
         'Color', '#D95319',...
         'LineStyle', '-',...
         'LineWidth', 2,...
@@ -26,7 +36,7 @@ figure
         'MarkerSize', 2);
         hold on;
 
-    plot(xRange, canonForm2,...
+    plot(xRange, forInitialApproximation2,...
         'Color', '#7E2F8E',...
         'LineStyle', '-',...
         'LineWidth', 2,...
@@ -34,8 +44,13 @@ figure
         'MarkerSize', 2);
         hold on;
 
-    ylim([-1 1]);
-    xlim([-2, 2]);
+        plot(0.95, -0.09, ...
+            'MarkerSize', 10,...
+            'Marker','*',...
+            'Color', 'k');
+
+    % ylim([-1 1]);
+    xlim([-1, 1]);
     title('Графический метод');
 
 
