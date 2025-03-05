@@ -46,3 +46,10 @@ disp("  Собственные значения:")
 disp(values');
 disp("  Собственные векторы:")
 disp(vectors);
+
+disp("Метод Крылова");
+[ values, vectors ] = krylovMethod(A);
+disp("  Собственные значения:")
+disp(values');
+disp("  Собственные векторы:")
+disp(vectors)
