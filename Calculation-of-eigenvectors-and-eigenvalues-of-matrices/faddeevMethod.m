@@ -3,7 +3,7 @@ function [ values, vectors ] = faddeevMethod(A)
 	
 	I = eye(n);
 	P = nan(n, 1);
-	B = nan(n, n, n); % rows, columns, depth
+	B = nan(n, n, n);
 	
 	A_i = A;
 
@@ -14,10 +14,9 @@ function [ values, vectors ] = faddeevMethod(A)
 		A_i = A * B(:, :, i);
 	end
 	
-	% собственные значения
+
 	values = roots([ 1; -P ]);
 	
-	% собственные векторы
 	if length(values) == length(unique(values))
 		vectors = norm(sum(values' .^ reshape(n - 1 : -1 : 0, 1, 1, n) .* cat(3, I, B(:, :, 1 : n - 1)), 3)); % стр. 254
 	else
@@ -29,7 +28,6 @@ function [ values, vectors ] = faddeevMethod(A)
 	end
 end
 
-% разделить, на последнее не нулевое число
 function A = norm(A)
 	n = size(A, 2);
 	
@@ -40,7 +38,6 @@ function A = norm(A)
 	end
 end
 
-% решение Ax = 0 при x_n = 1
 function result = solveNorm(A)
 	result = [ -A(:, 1 : end - 1) \ A(:, end); 1 ];
 end

@@ -7,11 +7,11 @@ clear all;
 % -0.35x1 + 0.81x2 + 0.32x3 + 3.33x4 = -3.57
 
 A = [
-       2.75 -0.59 -0.79 -0.35;
-      -0.59 4.85 0.71 0.81;
-      -0.79 0.71 3.25 0.32;
-      -0.35 0.81 0.32 3.33; 
-      ];
+    2.75 -0.59 -0.79 -0.35;
+    -0.59 4.85 0.71 0.81;
+    -0.79 0.71 3.25 0.32;
+    -0.35 0.81 0.32 3.33; 
+    ];
 
 % для нерегулярного случая в методе Данилевского
 B = [ 
@@ -27,8 +27,10 @@ disp(values');
 fprintf("  Собственные векторы:\n")
 disp(vectors);
 fprintf("  Проверка:\n")
-disp(B * vectors);
-disp(vectors * diag(values))
+check = B * vectors - vectors * diag(values);
+fprintf("Ax - lx = ");
+fprintf(" %.5f ", check);
+fprintf("\n\n");
 
 fprintf("Метод Данилевского, регулярный случай\n");
 [ values, vectors ] = danilevskyMethod(A);
@@ -37,8 +39,10 @@ disp(values');
 fprintf("  Собственные векторы:\n")
 disp(vectors);
 fprintf("  Проверка:\n")
-disp(A * vectors);
-disp(vectors * diag(values));
+check = A * vectors - vectors * diag(values);
+fprintf("Ax - lx = ");
+fprintf(" %.5f ", check);
+fprintf("\n\n");
 
 fprintf("Метод Фаддеева\n");
 [ values, vectors ] = faddeevMethod(A);
@@ -46,13 +50,23 @@ fprintf("  Собственные значения:\n")
 disp(values');
 fprintf("  Собственные векторы:\n")
 disp(vectors);
+fprintf("  Проверка:\n")
+check = A * vectors - vectors * diag(values);
+fprintf("Ax - lx = ");
+fprintf(" %.5f ", check);
+fprintf("\n\n");
 
 fprintf("Метод Крылова\n");
 [ values, vectors ] = krylovMethod(A);
 fprintf("  Собственные значения:\n")
 disp(values');
 fprintf("  Собственные векторы:\n")
-disp(vectors)
+disp(vectors);
+fprintf("  Проверка:\n")
+check = A * vectors - vectors * diag(values);
+fprintf("Ax - lx = ");
+fprintf(" %.5f ", check);
+fprintf("\n\n");
 
 fprintf("Метод Леверье\n");
 [ values, vectors ] = leverrierMethod(A);
@@ -60,17 +74,22 @@ fprintf("  Собственные значения:\n")
 disp(values');
 fprintf("  Собственные векторы:\n")
 disp(vectors);
+fprintf("  Проверка:\n")
+check = A * vectors - vectors * diag(values);
+fprintf("Ax - lx = ");
+fprintf(" %.5f ", check);
+fprintf("\n\n");
 
 rng(1); %seed для случайных чисел
 
 fprintf("Степенной метод\n");
-[ value_1, vector ] = powerMethod(A, 10);
+[ value1, vector ] = powerMethod(A, 50);
 fprintf("  Наибольшее по модулю собственное значение:\n")
-disp(value_1);
-fprintf("  Его собственный вектор:\n")
+disp(value1);
+fprintf("  Coбственный вектор:\n")
 disp(vector);
 
-accuracy = 1 * 10 ^ (-5);
+accuracy = 0.5 * 10 ^ (-3);
 
 fprintf("Метод вращений\n");
 fprintf("Точность: %f\n", accuracy);
@@ -79,3 +98,15 @@ fprintf("  Собственные значения:\n")
 disp(values');
 fprintf("  Собственные векторы:\n")
 disp(vectors);
+fprintf("  Проверка:\n")
+check = A * vectors - vectors * diag(values);
+fprintf("Ax - lx = ");
+fprintf(" %.5f ", check);
+fprintf("\n\n");
+
+fprintf("Метод лямбда-разности\n");
+[ value2, vector ] = lambdaDifferenceMethod(A, value1, 50);
+fprintf("  Второе по модулю собственное значение:\n")
+disp(value2);
+fprintf(" Cобственный вектор:\n")
+disp(vector);

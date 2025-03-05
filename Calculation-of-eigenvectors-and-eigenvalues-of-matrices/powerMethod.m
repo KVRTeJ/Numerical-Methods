@@ -3,17 +3,14 @@ function [ lambda, vector ] = powerMethod(A, degree)
 	
 	y0 = rand(n, 1);
 	
-	yk1 = A ^ degree * y0; % 8.1
+	yk1 = A ^ degree * y0; 
 	yk2 = A ^ (degree + 1) * y0;
 	
-	% собственное значение
-	lambda = sum(yk2 .* yk1) / sum(yk1 .* yk1); % стр. 30, в конце
-	
-	% собственный вектор
+	lambda = sum(yk2 .* yk1) / sum(yk1 .* yk1); 
 	vector = norm(yk1);
 end
 
-% разделить, на последнее не нулевое число
+
 function A = norm(A)
 	n = size(A, 2);
 	

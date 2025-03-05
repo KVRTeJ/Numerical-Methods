@@ -14,10 +14,8 @@ function [ values, vectors ] = leverrierMethod(A)
 		P(k) = (1 / k) * (S(k) - sum(S(k - 1 : -1 : 1) .* P(1 : k - 1))); % 3.2
 	end
 
-	% собственные значения
 	values = roots([ 1; -P ]);
 
-	% собственные векторы
 	vectors = nan(n);
 
 	for i = 1 : n
@@ -25,7 +23,6 @@ function [ values, vectors ] = leverrierMethod(A)
 	end
 end
 
-% решение Ax = 0 при x_n = 1
 function result = solveNorm(A)
 	result = [ -A(:, 1 : end - 1) \ A(:, end); 1 ];
 end

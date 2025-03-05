@@ -1,23 +1,18 @@
 function [values, vectors] = danilevskyMethod(A) 
     n = size(A, 1); 
 	
-	F = A; % матрица Фробениуса
-	S = eye(n); %матрица с единицами на диагонали
+	Froben = A;
+	S = eye(n);
 	
 	for k = n : -1 : 2
-		if F(1, n) == 0
-			% нерегулярный случай
-			j = find(F(1 : k - 1, n), 1); % индекс первого отличного от нуля элемента в последнем столбце
+		if Froben(1, n) == 0
+			j = find(Froben(1 : k - 1, n), 1);
 			
 			if isempty(j)
-				% блочная матрица
-				[BValues, ~] = danilevskyMethod(F(1 : k - 1, 1 : k - 1));
-				[AValues, ~] = danilevskyMethod(F(k : n, k : n));
+				[BValues, ~] = danilevskyMethod(Froben(1 : k - 1, 1 : k - 1));
+				[AValues, ~] = danilevskyMethod(Froben(k : n, k : n));
 				
-				% собственные значения
 				values = [ BValues; AValues ];
-				
-				% собственные векторы
 				vectors = zeros(n);
 				
 				for i = 1 : n
@@ -25,27 +20,23 @@ function [values, vectors] = danilevskyMethod(A)
 				end
 
 				return
-			else
-				% меняем местами строки и столбцы
-				F([1 j], :) = F([j 1], :);
-				F(:, [1 j]) = F(:, [j 1]);
+            else
+				Froben([1 j], :) = Froben([j 1], :);
+				Froben(:, [1 j]) = Froben(:, [j 1]);
 			end
 		end
 		
-		% преобразование подобия 
-		M = [ [ zeros(1, n - 1); eye(n - 1) ], F(:, n)];
+		M = [ [ zeros(1, n - 1); eye(n - 1) ], Froben(:, n)];
 		
-		F = M \ F * M; % стр. 249 inv(M) * F * M.
+		Froben = M \ Froben * M;
 
 		S = S * M;
 	end
 
-	% собственные значения
-	P = [ 1; -F(n : -1 : 1, n) ];
+	P = [ 1; -Froben(n : -1 : 1, n) ];
 	
 	values = roots(P);
 	
-	% собственные векторы
 	vectors = nan(n);
 	
 	for j = 1 : n
@@ -55,7 +46,6 @@ function [values, vectors] = danilevskyMethod(A)
 	vectors = norm(S * vectors);
 end
 
-% разделить, на последнее не нулевое число
 function A = norm(A)
 	n = size(A, 2);
 	
@@ -66,7 +56,6 @@ function A = norm(A)
 	end
 end
 
-% решение Ax = 0 при x_n = 1
 function result = solveNorm(A)
 	result = [ -A(:, 1 : end - 1) \ A(:, end); 1 ];
 end

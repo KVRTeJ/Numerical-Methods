@@ -5,7 +5,7 @@ function [ values, vectors ] = krylovMethod(A)
 	
 	m = 0;
 	
-	while m < rank(c) % пока вектора линейно независисы
+	while m < rank(c)
 		m = m + 1;
 		
 		c = [ c, A ^ m * c(:, 1) ];
@@ -13,12 +13,10 @@ function [ values, vectors ] = krylovMethod(A)
 	
 	Q = linsolve(c(:, m : -1 : 1), c(:, m + 1));
 	
-	% собственные значения
 	P = [ 1; -Q ];
 	
 	values = roots(P);
 	
-	% собственные векторы
 	B = nan(1, m, m);
 	
 	for k = 1 : m
@@ -33,7 +31,6 @@ function [ values, vectors ] = krylovMethod(A)
 	vectors = norm(vectors);
 end
 
-% разделить, на последнее не нулевое число
 function A = norm(A)
 	n = size(A, 2);
 	
