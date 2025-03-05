@@ -30,6 +30,7 @@ disp("  Проверка:")
 disp(B * vectors);
 disp(vectors * diag(values))
 
+disp("Метод Данилевского, регулярный случай");
 [ values, vectors ] = danilevskyMethod(A);
 disp("  Собственные значения:")
 disp(values');
@@ -38,3 +39,10 @@ disp(vectors);
 disp("  Проверка:")
 disp(A * vectors);
 disp(vectors * diag(values));
+
+disp("Метод Фаддеева");
+[ values, vectors ] = faddeevMethod(A);
+disp("  Собственные значения:")
+disp(values');
+disp("  Собственные векторы:")
+disp(vectors);
