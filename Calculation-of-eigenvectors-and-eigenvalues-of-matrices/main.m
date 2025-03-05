@@ -6,3 +6,35 @@ clear all;
 % -0.79x1 + 0.71x2 + 3.25x3 + 0.32x4 = -18.46
 % -0.35x1 + 0.81x2 + 0.32x3 + 3.33x4 = -3.57
 
+A = [
+       2.75 -0.59 -0.79 -0.35;
+      -0.59 4.85 0.71 0.81;
+      -0.79 0.71 3.25 0.32;
+      -0.35 0.81 0.32 3.33; 
+      ];
+
+% нерегулярный случай
+B = [ 
+    1, 2, 0; 
+    2, 3, 0;
+    3, 4, 5;
+    ];
+
+disp("Метод Данилевского, нерегулярный случай");
+[ values, vectors ] = danilevskyMethod(B);
+disp("  Собственные значения:")
+disp(values');
+disp("  Собственные векторы:")
+disp(vectors);
+disp("  Проверка:")
+disp(B * vectors);
+disp(vectors * diag(values))
+
+[ values, vectors ] = danilevskyMethod(A);
+disp("  Собственные значения:")
+disp(values');
+disp("  Собственные векторы:")
+disp(vectors);
+disp("  Проверка:")
+disp(A * vectors);
+disp(vectors * diag(values));
