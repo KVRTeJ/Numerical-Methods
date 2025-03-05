@@ -69,3 +69,13 @@ fprintf("  Наибольшее по модулю собственное зна�
 disp(value_1);
 fprintf("  Его собственный вектор:\n")
 disp(vector);
+
+accuracy = 1 * 10 ^ (-5);
+
+fprintf("Метод вращений\n");
+fprintf("Точность: %f\n", accuracy);
+[ values, vectors ] = rotationMethod(A, accuracy);
+fprintf("  Собственные значения:\n")
+disp(values');
+fprintf("  Собственные векторы:\n")
+disp(vectors);
