@@ -8,7 +8,7 @@ function [ values, vectors ] = faddeevMethod(A)
 	A_i = A;
 
 	for i = 1 : n
-		P(i) = trace(A_i) / i; % след матрицы
+		P(i) = trace(A_i) / i;
 		B(:, :, i) = A_i - P(i) .* I;
 		
 		A_i = A * B(:, :, i);

@@ -20,43 +20,52 @@ B = [
     3, 4, 5;
     ];
 
-disp("Метод Данилевского, нерегулярный случай");
+fprintf("Метод Данилевского, нерегулярный случай\n");
 [ values, vectors ] = danilevskyMethod(B);
-disp("  Собственные значения:")
+fprintf("  Собственные значения:\n")
 disp(values');
-disp("  Собственные векторы:")
+fprintf("  Собственные векторы:\n")
 disp(vectors);
-disp("  Проверка:")
+fprintf("  Проверка:\n")
 disp(B * vectors);
 disp(vectors * diag(values))
 
-disp("Метод Данилевского, регулярный случай");
+fprintf("Метод Данилевского, регулярный случай\n");
 [ values, vectors ] = danilevskyMethod(A);
-disp("  Собственные значения:")
+fprintf("  Собственные значения:\n")
 disp(values');
-disp("  Собственные векторы:")
+fprintf("  Собственные векторы:\n")
 disp(vectors);
-disp("  Проверка:")
+fprintf("  Проверка:\n")
 disp(A * vectors);
 disp(vectors * diag(values));
 
-disp("Метод Фаддеева");
+fprintf("Метод Фаддеева\n");
 [ values, vectors ] = faddeevMethod(A);
-disp("  Собственные значения:")
+fprintf("  Собственные значения:\n")
 disp(values');
-disp("  Собственные векторы:")
+fprintf("  Собственные векторы:\n")
 disp(vectors);
 
-disp("Метод Крылова");
+fprintf("Метод Крылова\n");
 [ values, vectors ] = krylovMethod(A);
-disp("  Собственные значения:")
+fprintf("  Собственные значения:\n")
 disp(values');
-disp("  Собственные векторы:")
+fprintf("  Собственные векторы:\n")
 disp(vectors)
 
-disp("Метод Леверье");
+fprintf("Метод Леверье\n");
 [ values, vectors ] = leverrierMethod(A);
-disp("  Собственные значения:")
+fprintf("  Собственные значения:\n")
 disp(values');
-disp("  Собственные векторы:")
+fprintf("  Собственные векторы:\n")
 disp(vectors);
+
+rng(1); %seed для случайных чисел
+
+fprintf("Степенной метод\n");
+[ value_1, vector ] = powerMethod(A, 10);
+fprintf("  Наибольшее по модулю собственное значение:\n")
+disp(value_1);
+fprintf("  Его собственный вектор:\n")
+disp(vector);
