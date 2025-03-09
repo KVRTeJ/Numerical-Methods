@@ -15,6 +15,19 @@ B = [
     0.11 0 0.03 0.58;
     ]
 
-b = [-1.2 0.81 -0.92 0.17];
+b = [-1.2; 0.81; -0.92; 0.17];
 
-checkSuff
+init = [0; 0; 0; 0];
+
+fprintf("Проверка сходимости метода простых итераций: \n");
+fprintf("Необходимое и достаточное условие: все собственные значения матрицы B удовлетворяют условию:|lambda_i| < 1:\n")
+[values, ~] = leverrierMethod(B);
+disp(abs(values));
+
+checkSufficientCondition(B);
+[result, steps] = simpleIterations(B, b, init, accuracy);
+fprintf("Результат метода простых итераций: ");
+disp(result');
+fprintf("Количетсво итераций: %d\n", steps);
+check = -0.92 * result(1) - 0.03 * result(2) - 0.04 * result(4) - 1.2;
+fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n", check);

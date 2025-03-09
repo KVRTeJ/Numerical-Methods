@@ -6,12 +6,22 @@ clear all;
 % x3 = 0.33x1 -0.37x3 +0.21x4 -0.92 
 % x4 = 0.11x1 +0.03x3 +0.58x4 +0.17
 
-A = [
+accuracy = 1 * 10 ^ -5;
+
+B = [
     0.08 -0.03 0 -0.04;
     0.51 0.27 0 -0.08;
-    0.33 -0.37 0.21 -0.92;
-    0.11 0.03 0.58 0.17;
+    0.33 0 -0.37 0.21;
+    0.11 0 0.03 0.58;
     ]
-b = [-1.2 0.81 -0.92 0.17];
 
-simpleIterations()
+b = [-1.2; 0.81; -0.92; 0.17];
+
+init = [0; 0; 0; 0];
+
+fprintf("Проверка сходимости метода простых итераций: ");
+
+[values, ~] = leverrierMethod(B)
+
+checkSufficientCondition(B);
+[result, steps] = simpleIterations(B, b, init, accuracy)

@@ -1,7 +1,7 @@
-function checkSufficientCondition(matrix)
-    norm = max(sum(abs(A), 2)); % максимум сумм модулей элементов строк
+function checkSufficientCondition(matrix) % стр 245 или
+    norm = max(sum(abs(matrix), 2)); % максимум сумм модулей элементов строк
 	
-	fprintf("  Норма = %g ", norm);
+	fprintf("Норма = %g ", norm);
 	
 	if norm < 1 
 		fprintf("< 1, достаточное условие выполнено.\n\n");
@@ -9,3 +9,4 @@ function checkSufficientCondition(matrix)
 		fprintf("≥ 1, достаточное условие не выполнено.\n\n");
 	end
 end
+
