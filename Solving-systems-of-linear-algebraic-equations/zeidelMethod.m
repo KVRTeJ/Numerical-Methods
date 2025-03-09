@@ -12,7 +12,7 @@ function [result, k] = zeidelMethod(B, b, result, eps)
 	
 	while any(isnan(prevResult)) || max(abs(result - prevResult)) > eps
 		prevResult = result;
-		
+		% (I - H)^(-1) * F * x(k - 1) + (I - H)^(-1)*b стр 247 
 		result = t * F * prevResult + t * b;
 		
 		k = k + 1;
