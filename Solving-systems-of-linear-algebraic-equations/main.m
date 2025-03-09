@@ -56,3 +56,37 @@ disp(result');
 fprintf("Количетсво итераций: %d\n", steps);
 check = -0.92 * result(1) - 0.03 * result(2) - 0.04 * result(4) - 1.2;
 fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n\n\n", check);
+
+
+
+
+checkSufficientCondition(B);
+init = b;
+[result, steps] = zeidelMethod(B, b, init, accuracy);
+fprintf("Начальное приближение: ");
+disp(init')
+fprintf("Результат метода простых итераций: ");
+disp(result');
+fprintf("Количетсво итераций: %d\n", steps);
+check = -0.92 * result(1) - 0.03 * result(2) - 0.04 * result(4) - 1.2;
+fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n\n\n", check);
+
+init = [-10; -10; -10; -10];
+[result, steps] = zeidelMethod(B, b, init, accuracy);
+fprintf("Начальное приближение: ");
+disp(init')
+fprintf("Результат метода простых итераций: ");
+disp(result');
+fprintf("Количетсво итераций: %d\n", steps);
+check = -0.92 * result(1) - 0.03 * result(2) - 0.04 * result(4) - 1.2;
+fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n\n\n", check);
+
+init = [10; 10; 10; 10];
+[result, steps] = zeidelMethod(B, b, init, accuracy);
+fprintf("Начальное приближение: ");
+disp(init')
+fprintf("Результат метода простых итераций: ");
+disp(result');
+fprintf("Количетсво итераций: %d\n", steps);
+check = -0.92 * result(1) - 0.03 * result(2) - 0.04 * result(4) - 1.2;
+fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n\n\n", check);
