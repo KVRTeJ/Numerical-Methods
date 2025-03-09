@@ -13,21 +13,46 @@ B = [
     0.51 0.27 0 -0.08;
     0.33 0 -0.37 0.21;
     0.11 0 0.03 0.58;
-    ]
+    ];
 
 b = [-1.2; 0.81; -0.92; 0.17];
 
-init = [0; 0; 0; 0];
 
-fprintf("Проверка сходимости метода простых итераций: \n");
+
+fprintf("  Метод простых итераций: \n")
+
+fprintf("Проверка сходимости метода: \n");
 fprintf("Необходимое и достаточное условие: все собственные значения матрицы B удовлетворяют условию:|lambda_i| < 1:\n")
 [values, ~] = leverrierMethod(B);
 disp(abs(values));
-
 checkSufficientCondition(B);
+
+init = b;
 [result, steps] = simpleIterations(B, b, init, accuracy);
+fprintf("Начальное приближение: ");
+disp(init')
 fprintf("Результат метода простых итераций: ");
 disp(result');
 fprintf("Количетсво итераций: %d\n", steps);
 check = -0.92 * result(1) - 0.03 * result(2) - 0.04 * result(4) - 1.2;
-fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n", check);
+fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n\n\n", check);
+
+init = [-10; -10; -10; -10];
+[result, steps] = simpleIterations(B, b, init, accuracy);
+fprintf("Начальное приближение: ");
+disp(init')
+fprintf("Результат метода простых итераций: ");
+disp(result');
+fprintf("Количетсво итераций: %d\n", steps);
+check = -0.92 * result(1) - 0.03 * result(2) - 0.04 * result(4) - 1.2;
+fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n\n\n", check);
+
+init = [10; 10; 10; 10];
+[result, steps] = simpleIterations(B, b, init, accuracy);
+fprintf("Начальное приближение: ");
+disp(init')
+fprintf("Результат метода простых итераций: ");
+disp(result');
+fprintf("Количетсво итераций: %d\n", steps);
+check = -0.92 * result(1) - 0.03 * result(2) - 0.04 * result(4) - 1.2;
+fprintf("Проверим,g подстановкой в одно из исходных уравнений системы(первое): %.4f\n\n\n", check);
